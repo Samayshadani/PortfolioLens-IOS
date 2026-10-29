@@ -1,0 +1,48 @@
+name: PortfolioLens
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  PortfolioLens:
+    type: application
+    platform: iOS
+    sources:
+      - path: PortfolioLens
+    info:
+      path: PortfolioLens/Info.plist
+      properties:
+        CFBundleDisplayName: PortfolioLens
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        NSFaceIDUsageDescription: PortfolioLens uses Face ID to keep your portfolio private.
+        ITSAppUsesNonExemptEncryption: false
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.portfoliolens
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        CODE_SIGN_STYLE: Automatic
+    scheme:
+      testTargets:
+        - PortfolioLensTests
+  PortfolioLensTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: PortfolioLensTests
+    dependencies:
+      - target: PortfolioLens
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.portfoliolens.tests
+        GENERATE_INFOPLIST_FILE: YES
