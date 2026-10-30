@@ -128,6 +128,18 @@ struct Order: Identifiable, Equatable {
     var statusTitle: String { status.replacingOccurrences(of: "_", with: " ").capitalized }
 }
 
+enum AlertDirection: String, CaseIterable, Codable {
+    case above, below
+
+    func isTriggered(by price: Decimal, target: Decimal) -> Bool {
+        self == .above ? price >= target : price <= target
+    }
+
+    var verb: String { self == .above ? "rises to or above" : "falls to or below" }
+    var shortVerb: String { self == .above ? "above" : "below" }
+    var icon: String { self == .above ? "arrow.up.circle.fill" : "arrow.down.circle.fill" }
+}
+
 enum AssetClass: String, CaseIterable, Identifiable, Codable {
     case equity, etf, bond, commodity, crypto, cash, realEstate, other
 

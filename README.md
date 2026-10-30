@@ -75,6 +75,19 @@ In Xcode:
 
 **Without XcodeGen:** create a new iOS App project in Xcode named `PortfolioLens` (SwiftUI, Swift, iOS 17). Delete its template `ContentView.swift` and `PortfolioLensApp.swift`, then drag in the `PortfolioLens/` folder ("Create groups"). Add `NSFaceIDUsageDescription` to the target's Info tab. For tests, add a Unit Testing Bundle target and drag in `PortfolioLensTests/`.
 
+## 2b. Working from Windows
+
+- **Logic and tests on Windows:** install the Swift toolchain (see below), then run `swift test` in this folder. This builds `Domain/` and `MarketModels.swift` through `Package.swift`. The SwiftUI screens still need macOS.
+- **Full build without a Mac:** push to a public GitHub repo. `.github/workflows/ios.yml` builds the app on GitHub's macOS runners, runs all tests, and uploads `PortfolioLens-simulator.zip`.
+- **Share for testing:** upload that zip to [appetize.io](https://appetize.io) to get a link that runs the app in any browser.
+
+```powershell
+# Swift on Windows (run in an admin terminal, then restart the terminal)
+winget install --id Microsoft.VisualStudio.2022.Community --exact --force --custom "--add Microsoft.VisualStudio.Component.Windows11SDK.22621 --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64"
+winget install --id Swift.Toolchain -e
+swift test
+```
+
 ## 3. Use it
 
 1. The first launch runs in **Demo mode**: a simulated market with a starter portfolio. Everything works offline, including orders.
